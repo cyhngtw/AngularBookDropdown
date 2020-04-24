@@ -1,0 +1,46 @@
+
+  <div class="row mx-5 p-5">
+    <div class="col-md-5">
+      <form [formGroup]="this.BookService.form" (ngSubmit)="onSubmit()">
+        <input type="hidden" formControlName="$key">
+
+        <!-- bookname -->
+        <div class="form-group">
+          <label>bookname</label>
+         
+          <input formControlName="bookname" class="form-control" [ngClass]="{'is-invalid':submitted && formControls.bookname.errors}">
+
+          <div class="invalid-feedback" *ngIf="submitted && formControls.bookname.errors">This field is required</div>
+        </div>
+
+        <!-- booktype -->
+        <div class="form-group">
+          <label>booktype</label>
+          
+             <select formControlName="booktype" name ="booktype" class="form-control" [(ngModel)]="booktypes">
+             <option *ngFor="let btype of booktypes" [value]="btype.name">{{btype.name}}</option>
+             </select>
+          <div class="invalid-feedback" *ngIf="submitted && formControls.booktype.errors">This field is required</div>
+        </div>
+        <div class="form-group">
+          <label>author</label>
+          
+          <input formControlName="author" class="form-control" [ngClass]="{'is-invalid':submitted && formControls.author.errors}">
+          <div class="invalid-feedback" *ngIf="submitted && formControls.author.errors">invalid author address ..</div>
+        </div>
+        
+       
+        <div class="form-group">
+          <input type="submit" class="btn btn-primary" value="Submit">
+          <div class="alert alert-info" *ngIf="showSuccessMessage">
+            You created a new world!
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-6 offset-md-1">
+      <app-book-list></app-book-list>
+    </div>
+  </div>
+
+  

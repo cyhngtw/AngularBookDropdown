@@ -1,0 +1,27 @@
+
+<form class="form-inline">
+    <input name="searchInput" class="form-control" placeholder="Search" #searchInput="ngModel" [(ngModel)]="searchText" style="width: 50%;">
+    <button class="btn btn-outline-primary" (click)="searchText=''">Search</button>
+</form>
+<table class="table table-sm">
+    <thead>
+            <th>bookname</th>
+            <th>booktype</th>
+            <th>author</th>
+                       
+    </thead>
+    <ng-container *ngFor="let book of bookArray">
+            <tr class="table-dark" *ngIf="filterCondition(book)">
+            <td>{{book.bookname}}</td>
+            <td>{{book.booktype}}</td>
+            <td>{{book.author}}</td>
+            
+            <td>
+                    <button class="btn btn-info" (click)="BookService.populateForm(book)">Edit</button>
+                    <button class="btn btn-danger" (click)="onDelete(book.$key)">Delete</button>
+            </td>
+            </tr>
+            <div class="alert alert-danger" *ngIf="showDeletedMessage">Deleted successfully</div>
+    </ng-container>
+</table>
+
